@@ -63,6 +63,8 @@ class BookspiderSpider(scrapy.Spider):
         table = response.css(".table")
         length = len(table)
 
+        rating = response.css("p.star-rating").attrib["class"].split(" ")[-1]
+
         df = pd.DataFrame(columns=["Column","Value"])
 
         rows = table = response.css(".table tr")
@@ -80,8 +82,10 @@ class BookspiderSpider(scrapy.Spider):
         # Some are stored in csv_files folder
 
         yield{
+            'url' : response.url,
             'book_name' : book_name,
             'book_price' : book_price,
             'category' : category,
+            'rating' : rating,
         }
 
