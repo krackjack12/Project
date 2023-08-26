@@ -88,4 +88,3 @@ class BookspiderSpider(scrapy.Spider):
             'category' : category,
             'rating' : rating,
         }
-
